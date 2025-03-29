@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Generating Your Portfolio</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            font-family: Arial, sans-serif;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-top: 20px;
+            font-size: 2em;
+            color: #000001;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background: #ff9900;
+            color: white;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            const form = document.getElementById('portfolioForm');
+            form.onsubmit = function (event) {
+                event.preventDefault();
+                const fullName = document.getElementById('fullName').value;
+                const professionalTitle = document.getElementById('professionalTitle').value;
+                const shortBio = document.getElementById('shortBio').value;
+                const profilePicture = document.getElementById('profilePicture').value;
+                const briefIntroduction = document.getElementById('briefIntroduction').value;
+                const technicalSkills = document.getElementById('technicalSkills').value.split(',');
+                const experience = document.getElementById('experience').value;
+                const education = document.getElementById('education').value;
+                const projectName = document.getElementById('projectName').value;
+                const projectDescription = document.getElementById('projectDescription').value;
+                const technologiesUsed = document.getElementById('technologiesUsed').value;
+                const projectLink = document.getElementById('projectLink').value;
+                const githubLink = document.getElementById('githubLink').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const linkedinProfile = document.getElementById('linkedinProfile').value;
+                const githubProfile = document.getElementById('githubProfile').value;
+                const portfolioWebsite = document.getElementById('portfolioWebsite').value;
+
+                const portfolioData = {
+                    fullName,
+                    professionalTitle,
+                    shortBio,
+                    profilePicture,
+                    briefIntroduction,
+                    technicalSkills,
+                    experience,
+                    education,
+                    projectName,
+                    projectDescription,
+                    technologiesUsed,
+                    projectLink,
+                    githubLink,
+                    email,
+                    phone,
+                    linkedinProfile,
+                    githubProfile,
+                    portfolioWebsite
+                };
+
+                const spinner = document.createElement('div');
+                spinner.className = 'spinner';
+                document.body.appendChild(spinner);
+
+                fetch('http://localhost:3000/generate-portfolio', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(portfolioData)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        document.body.innerHTML += `<h2>${data.fullName}'s Portfolio</h2>`;
+                        const skillsList = document.createElement('ul');
+                        data.technicalSkills.forEach(skill => {
+                            const li = document.createElement('li');
+                            li.textContent = skill;
+                            skillsList.appendChild(li);
+                        });
+                        document.body.appendChild(skillsList);
+                        document.body.removeChild(spinner);
+                    });
+            };
+        };
+    </script>
+</head>
+
+<body>
+    <h1 style="font-family: 'Roboto', sans-serif; color: #007bff;">Enter Your Details</h1><br>
+
+
+    <form id="portfolioForm">
+        <h3 style="font-family: 'Roboto', sans-serif; color: #007bff;">Basic Information</h3>
+
+
+        <input type="text" id="fullName" placeholder="Full Name" required><br>
+        <input type="text" id="professionalTitle" placeholder="Professional Title (e.g., Full-Stack Developer)"
+            required><b></b>
+        <input type="text" id="shortBio" placeholder="Short Bio" required><br>
+        <input type="text" id="profilePicture" placeholder="Profile Picture URL" required><br>
+
+        <h3 style="font-family: 'Roboto', sans-serif; color: #007bff;">About Section</h3><br>
+
+
+        <input type="text" id="briefIntroduction" placeholder="Brief Introduction" required><br>
+        <input type="text" id="technicalSkills" placeholder="Technical Skills (e.g., React.js, Node.js)" required><br>
+        <input type="text" id="experience" placeholder="Experience (Years)" required><br>
+        <input type="text" id="education" placeholder="Education (Degree, University)" required><br>
+
+        <h3 style="font-family: 'Roboto', sans-serif; color: #007bff;">Projects Section</h3><br>
+
+
+        <input type="text" id="projectName" placeholder="Project Name" required><br>
+        <input type="text" id="projectDescription" placeholder="Description" required><br>
+        <input type="text" id="technologiesUsed" placeholder="Technologies Used" required><br>
+        <input type="text" id="projectLink" placeholder="Project Link (if available)"><br>
+        <input type="text" id="githubLink" placeholder="GitHub Link (if applicable)"><br>
+
+        <h3 style="font-family: 'Roboto', sans-serif; color: #007bff;">Contact Information</h3><br>
+
+
+        <input type="email" id="email" placeholder="Email" required><br>
+        <input type="text" id="phone" placeholder="Phone (optional)"><br>
+        <input type="text" id="linkedinProfile" placeholder="LinkedIn Profile"><br>
+        <input type="text" id="githubProfile" placeholder="GitHub Profile"><br>
+        <input type="text" id="portfolioWebsite" placeholder="Portfolio Website (if any)"><br>
+
+        <button type="submit"
+            style="background-color: #007bff; color: white; border: none; border-radius: 5px; padding: 10px 20px; font-size: 16px; cursor: pointer; font-family: 'Roboto', sans-serif;">Generate
+            Portfolio</button>
+
+
+    </form>
+    <h3>Download Your Portfolio</h3><br>
+    <button id="downloadButton" style="display:none;">Download Portfolio</button><br>
+
+    <div id="portfolioOutput"></div>
+</body>
+
+</html>
