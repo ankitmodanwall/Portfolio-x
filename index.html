@@ -7,11 +7,37 @@
     <title>Live Project</title>
 </head>
 <body>
-    <h1 style="color: #007bff;">Welcome to the Professional Portfolio Generator</h1>
+    <h1 style="color: #00ff48; position: absolute; bottom: 40px; right: 18px; font-family: 'Times New Roman', Times, serif;">Welcome to the Professional Portfolio Generator</h1>
+    <img src="images/1.png" alt="Background Image 1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"/>
+    <img src="images/2.png" alt="Background Image 2" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"/>
+    <img src="images/3.png" alt="Background Image 3" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"/>
+    <img src="images/6.png" alt="Background Image 4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"/>
+    <img src="images/9.png" alt="Background Image 5" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"/>
+    <script>
+        let currentImageIndex = 0;
+        const images = [
+            "path/to/your/background-image1.jpg",
+            "path/to/your/background-image2.jpg",
+            "path/to/your/background-image3.jpg",
+            "path/to/your/background-image4.jpg",
+            "path/to/your/background-image5.jpg"
+        ];
 
-    <button id="generateBtn" style="background-color: #007bff; color: white; border: none; border-radius: 5px; padding: 10px 20px; font-size: 16px; cursor: pointer;">Generate</button>
+        function changeBackground() {
+            const imgElements = document.querySelectorAll('img[alt^="Background Image"]');
+            imgElements.forEach((img, index) => {
+                img.style.display = index === currentImageIndex ? 'block' : 'none';
+            });
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+        }
+
+        setInterval(changeBackground, 3000); // Change image every 3 seconds
+    </script>
+
+    <button id="generateBtn" style="background-color: green; color: 
+    white; border: none; border-radius: 5px; padding: 10px 20px; 
+    font-size: 16px; cursor: pointer; position: absolute; bottom: 10px; right: 10px;">Generate</button>
 
     <script src="js/main.js"></script>
 </body>
 </html>
-</create_file>
