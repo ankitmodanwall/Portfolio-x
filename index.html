@@ -5,14 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <title>Live Project</title>
+    <style>
+        .log-area {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .centered {
+            text-align: center;
+            position: absolute;
+            bottom: 40px;
+            right: 50%;
+            transform: translateX(50%);
+        }
+    </style>
 </head>
 <body>
-    <h1 style="color: #00ff48; position: absolute; bottom: 40px; right: 18px; font-family: 'Times New Roman', Times, serif;">Welcome to the Professional Portfolio Generator</h1>
+    <h1 class="centered" style="color: #00ff48; font-family: 'Times New Roman', Times, serif;">Welcome to the Professional Portfolio Generator</h1>
     <img src="images/1.png" alt="Background Image 1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"/>
     <img src="images/2.png" alt="Background Image 2" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"/>
     <img src="images/3.png" alt="Background Image 3" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"/>
     <img src="images/6.png" alt="Background Image 4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"/>
     <img src="images/9.png" alt="Background Image 5" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"/>
+    
+    <div class="log-area"></div>
+
+    <button id="generateBtn" style="background-color: green; color: white; border: none; border-radius: 5px; padding: 10px 20px; font-size: 16px; cursor: pointer; position: absolute; bottom: 10px; right: 50%; transform: translateX(50%);">Generate</button>
+
     <script>
         let currentImageIndex = 0;
         const images = [
@@ -33,10 +54,6 @@
 
         setInterval(changeBackground, 3000); // Change image every 3 seconds
     </script>
-
-    <button id="generateBtn" style="background-color: green; color: 
-    white; border: none; border-radius: 5px; padding: 10px 20px; 
-    font-size: 16px; cursor: pointer; position: absolute; bottom: 10px; right: 10px;">Generate</button>
 
     <script src="js/main.js"></script>
 </body>
